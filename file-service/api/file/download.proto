@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package file;
+option go_package = "../../pkg/pb;filegrpc";
+
+
+message DownloadRequest {
+    string file_name = 1;     
+  }
+  
+
+  message DownloadResponse {
+    bytes file_chunk = 1;       
+    string file_name = 2;       
+  }

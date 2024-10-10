@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package file;
+option go_package = "../../pkg/pb;filegrpc";
+
+import "download.proto";
+import "list.proto";
+import "upload.proto";
+
+service FileService {
+    rpc UploadFile(stream UploadRequest) returns (UploadResponse);
+    rpc ListFiles(ListFilesRequest) returns (ListFilesResponse);
+    rpc DownloadFile(DownloadRequest) returns (DownloadResponse);
+  }
+
