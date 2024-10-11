@@ -13,7 +13,7 @@ type App struct {
 }
 
 func New(log *slog.Logger, cfg *config.GRPCConfig) *App {
-	fileService := file.New(log)
+	fileService := file.New(log, cfg.StoragePath)
 	grpcApp := grpcapp.New(log, fileService, cfg)
 
 	return &App{

@@ -28,7 +28,8 @@ func New(log *slog.Logger, file *file.File, cfg *config.GRPCConfig) *App {
 		grpc.StreamInterceptor(streamLoggingInterceptor(log)),
 	)
 
-	filegrpc.Register(gRPCServer, file)
+	filegrpc.Register(gRPCServer, log, cfg, file)
+	// reflection.Register(gRPCServer)
 
 	return &App{
 		log:        log,

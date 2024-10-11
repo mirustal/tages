@@ -12,6 +12,7 @@ import (
 type GRPCConfig struct {
 	Port           int `yaml:"port"`
 	TimeoutConnect int `yaml:"timeout"`
+	StoragePath    string `yaml:"storagepath"`
 }
 
 type Config struct {
