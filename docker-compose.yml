@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  file-service:
+    build:
+      context: .
+    networks:
+      - app-tier
+    ports:
+      - "9002:9002"
+
+networks:
+  app-tier:
+    driver: bridge

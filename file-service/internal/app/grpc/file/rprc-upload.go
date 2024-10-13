@@ -31,10 +31,15 @@ func (s *serverAPI) UploadFile(stream filegrpc.FileService_UploadFileServer) err
 		}
 		fileData = append(fileData, req.GetFileChunk()...)
 	}
+
+	if err := os.MkdirAll(s.cfg.StoragePath, os.ModePerm); err != nil {
+		return fmt.Errorf("failed to create storage directory: %w", err)
+	}
+
 	filePath := filepath.Join(s.cfg.StoragePath, fileName)
-    if err := os.WriteFile(filePath, fileData, 0644); err != nil {
-        return fmt.Errorf("failed to save file: %w", err)
-    }
+	if err := os.WriteFile(filePath, fileData, 0644); err != nil {
+		return fmt.Errorf("failed to save file: %w", err)
+	}
 
 	return stream.SendAndClose(&filegrpc.UploadResponse{
 		FileName: fileName,
