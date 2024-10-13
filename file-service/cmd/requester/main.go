@@ -44,10 +44,13 @@ func main() {
 			listFiles(client)
 
 		case "3":
-			fmt.Print("Введите путь к файлу для загрузки: ")
+			fmt.Print("Введите путь к файлу для загрузки(полный путь с файлом): ")
 			filePath, _ := reader.ReadString('\n')
 			filePath = strings.TrimSpace(filePath)
-			uploadFile(client, filePath)
+			fmt.Print("Введите название файла для загрузки: ")
+			fileName, _ := reader.ReadString('\n')
+			fileName = strings.TrimSpace(fileName)
+			uploadFile(client, filePath, fileName)
 
 		case "q":
 			break
@@ -99,7 +102,7 @@ func listFiles(client filegrpc.FileServiceClient) {
 	}
 }
 
-func uploadFile(client filegrpc.FileServiceClient, filePath string) {
+func uploadFile(client filegrpc.FileServiceClient, filePath string, fileName string) {
 	fileInfo, err := os.Stat(filePath)
 	if err != nil {
 		log.Fatalf("Failed to get file info: %v", err)
@@ -112,8 +115,9 @@ func uploadFile(client filegrpc.FileServiceClient, filePath string) {
 	if err != nil {
 		log.Fatalf("Failed to read file: %v", err)
 	}
-	fileName := filepath.Base(filePath)
-
+	if fileName == "" {
+		fileName = filepath.Base(filePath)
+	}
 	stream, err := client.UploadFile(context.Background())
 	if err != nil {
 		log.Fatalf("Failed to open upload stream: %v", err)
