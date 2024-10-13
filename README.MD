@@ -23,7 +23,7 @@ docker-compose up --build
 
 1. Откройте терминал и выполните команду для запуска программы:
 
-    ```bash
+    ```
     go run file-service/cmd/requester/main.go
     ```
 
@@ -88,7 +88,7 @@ grpcurl -plaintext -import-path /Users/mirustal/Documents/project/go/tages/file-
 
 **Пример использования:**
 ```
-grpcurl -plaintext -import-path /Users/mirustal/Documents/project/go/tages/file-service/api/file -proto file.proto -d '{}' localhost:9002 file.FileService/ListFiles
+grpcurl -plaintext -import-path {путь до файла}/tages/file-service/api/file -proto file.proto -d '{}' localhost:9002 file.FileService/ListFiles
 ```
 
 ---
@@ -108,7 +108,7 @@ grpcurl -plaintext -import-path /Users/mirustal/Documents/project/go/tages/file-
 
 **Пример использования:**
 ```
-grpcurl -plaintext -import-path /Users/mirustal/Documents/project/go/tages/file-service/api/file -proto file.proto -d '{ 
+grpcurl -plaintext -import-path {путь до файла}/tages/file-service/api/file -proto file.proto -d '{ 
 
   "file_name": "example.jpg"
 
